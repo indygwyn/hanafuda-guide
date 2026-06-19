@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hanafuda &amp; Koi-Koi — Visual Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:      #1a1410;
+  --paper:    #f7f3ec;
+  --paper-2:  #ede7d9;
+  --red:      #c0392b;
+  --gold:     #b8860b;
+  --blue:     #2c5f8a;
+  --green:    #2d6a4f;
+  --muted:    #6b5e4e;
+  --border:   rgba(26,20,16,0.15);
+  --bright-bg:#fff8e1;
+  --animal-bg:#e8f5e9;
+  --ribbon-bg:#fce4ec;
+  --chaff-bg: #f3f0eb;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.65;
+}
+.hero {
+  background: var(--ink);
+  color: var(--paper);
+  text-align: center;
+  padding: 72px 24px 64px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(255,255,255,0.015) 40px,rgba(255,255,255,0.015) 41px);
+}
+.hero-kanji {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(64px, 14vw, 120px);
+  font-weight: 700;
+  color: var(--paper);
+  opacity: 0.07;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  pointer-events: none;
+  letter-spacing: 0.2em;
+}
+.hero h1 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(26px, 5vw, 42px);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  position: relative;
+}
+.hero-sub {
+  font-size: 14px;
+  opacity: 0.55;
+  margin-top: 10px;
+  letter-spacing: 0.08em;
+  position: relative;
+}
+.hero-cards {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 36px;
+  position: relative;
+  flex-wrap: wrap;
+}
+.hero-cards img {
+  width: 50px;
+  border-radius: 4px;
+  opacity: 0.82;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.hero-cards img:hover { opacity: 1; transform: translateY(-5px); }
+nav {
+  background: var(--ink);
+  border-top: 1px solid rgba(255,255,255,0.07);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-inner {
+  display: flex;
+  justify-content: center;
+  max-width: 900px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+nav a {
+  color: rgba(247,243,236,0.6);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  padding: 13px 18px;
+  display: block;
+  transition: color 0.15s;
+  border-bottom: 2px solid transparent;
+}
+nav a:hover { color: var(--paper); }
+.container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+section { padding: 56px 0 48px; border-bottom: 1px solid var(--border); }
+.section-header { margin-bottom: 32px; }
+.section-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 5px;
+}
+.section-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 26px;
+  font-weight: 400;
+}
+.section-kanji { font-size: 18px; color: var(--muted); margin-left: 10px; }
+.section-desc { margin-top: 9px; color: var(--muted); font-size: 14px; max-width: 580px; }
+.legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 26px; }
+.legend-item { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--muted); }
+.legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+.suit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 14px; }
+.suit-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  display: flex;
+  gap: 12px;
+}
+.suit-cards-col { display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; }
+.suit-cards-col img { width: 40px; border-radius: 3px; }
+.suit-info { flex: 1; min-width: 0; }
+.suit-month-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 1px; }
+.suit-name { font-family: 'Noto Serif JP', serif; font-size: 14px; font-weight: 700; margin-bottom: 1px; }
+.suit-kanji-sm { font-size: 20px; color: var(--muted); line-height: 1; margin-bottom: 8px; }
+.card-tags { display: flex; flex-direction: column; gap: 3px; }
+.tag { font-size: 11px; padding: 2px 7px; border-radius: 3px; display: inline-block; width: fit-content; }
+.tag-bright  { background: #fff8e1; color: #7a5500; }
+.tag-animal  { background: #e8f5e9; color: #1b4d32; }
+.tag-poetry  { background: #fce4ec; color: #7a1a2e; }
+.tag-blue    { background: #e3edf8; color: #1a3d5c; }
+.tag-ribbon  { background: #fce4ec; color: #7a1a2e; }
+.tag-chaff   { background: #f3f0eb; color: var(--muted); }
+.special-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 14px; }
+.special-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  text-align: center;
+}
+.special-card img { width: 68px; border-radius: 4px; margin-bottom: 10px; }
+.special-card-name { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+.special-card-sub { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+.special-card-note { font-size: 11px; color: var(--muted); line-height: 1.5; }
+.subgroup-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 14px;
+}
+.subgroup-label + .special-grid { margin-bottom: 32px; }
+.yaku-group { margin-bottom: 38px; }
+.yaku-group-title {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 14px;
+}
+.yaku-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 12px; }
+.yaku-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 15px;
+}
+.yaku-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 7px; }
+.yaku-name { font-family: 'Noto Serif JP', serif; font-size: 14px; font-weight: 700; }
+.yaku-kanji-sm { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.yaku-pts { font-family: 'Noto Serif JP', serif; font-size: 22px; font-weight: 700; white-space: nowrap; flex-shrink: 0; margin-left: 8px; }
+.pts-s { color: var(--red); }
+.pts-a { color: var(--green); }
+.pts-b { color: var(--blue); }
+.pts-c { color: var(--muted); }
+.yaku-desc { font-size: 12px; color: var(--muted); margin-bottom: 10px; line-height: 1.5; }
+.yaku-cards-row { display: flex; gap: 5px; flex-wrap: wrap; align-items: flex-end; }
+.yaku-cards-row img { width: 36px; border-radius: 3px; }
+.yaku-plus { font-size: 16px; color: var(--border); align-self: center; line-height: 1; }
+.rules-flow { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 30px; }
+.rule-step { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 14px 15px; }
+.step-num { font-family: 'Noto Serif JP', serif; font-size: 28px; font-weight: 700; color: var(--paper-2); line-height: 1; margin-bottom: 5px; }
+.step-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+.step-body { font-size: 12px; color: var(--muted); line-height: 1.55; }
+.decision-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+.decision-box { border-radius: 8px; padding: 15px; border: 1px solid; }
+.decision-box.koi { background: #e8f5e9; border-color: #a5d6a7; }
+.decision-box.stop { background: #fce4ec; border-color: #f48fb1; }
+.decision-title { font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+.decision-body { font-size: 12px; line-height: 1.55; color: var(--muted); }
+.rule-note {
+  background: var(--paper-2);
+  border-radius: 6px;
+  padding: 13px 15px;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+.rule-note strong { color: var(--ink); }
+.strategy-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 12px; }
+.tip-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 15px; }
+.tip-title { font-size: 14px; font-weight: 500; margin-bottom: 8px; }
+.tip-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.tip-list li { font-size: 12px; color: var(--muted); padding-left: 14px; position: relative; line-height: 1.5; }
+.tip-list li::before { content: '→'; position: absolute; left: 0; color: var(--red); font-size: 11px; top: 1px; }
+footer {
+  background: var(--ink);
+  color: rgba(247,243,236,0.38);
+  text-align: center;
+  padding: 36px 24px;
+  font-size: 12px;
+  line-height: 1.9;
+}
+footer a { color: rgba(247,243,236,0.55); }
+@media (max-width: 520px) {
+  .decision-row { grid-template-columns: 1fr; }
+  .hero-cards img { width: 38px; }
+  nav a { padding: 11px 12px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-kanji">花札</div>
+  <h1>Hanafuda &amp; Koi-Koi</h1>
+  <p class="hero-sub">A visual reference guide · 花札と こいこい</p>
+  <div class="hero-cards">
+    <img src="cards/Hanafuda_January_Hikari_Alt.svg" alt="Crane bright — January">
+    <img src="cards/Hanafuda_March_Hikari_Alt.svg" alt="Curtain bright — March">
+    <img src="cards/Hanafuda_August_Hikari_Alt.svg" alt="Moon bright — August">
+    <img src="cards/Hanafuda_November_Hikari_Alt.svg" alt="Rainman bright — November">
+    <img src="cards/Hanafuda_December_Hikari_Alt.svg" alt="Phoenix bright — December">
+  </div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#suits">12 suits</a>
+    <a href="#specials">Special cards</a>
+    <a href="#yaku">Yaku</a>
+    <a href="#rules">Rules</a>
+    <a href="#strategy">Strategy</a>
+  </div>
+</nav>
+
+<!-- SUITS -->
+<section id="suits">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">The deck</div>
+      <h2 class="section-title">12 suits <span class="section-kanji">十二ヶ月</span></h2>
+      <p class="section-desc">48 cards in 12 suits, one per month. Each suit has exactly 4 cards. You match and capture cards by month — same flower, same suit.</p>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#b8860b"></div>Bright (hikari 光)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#2d6a4f"></div>Animal (tane 種)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#c0392b"></div>Ribbon (tanzaku 短冊)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#9e8e7e"></div>Chaff (kasu カス)</div>
+    </div>
+    <div class="suit-grid">
+
+      <div class="suit-card">
+        <div class="suit-cards-col">
+          <img src="cards/Hanafuda_January_Hikari_Alt.svg" alt="Jan bright">
+          <img src="cards/Hanafuda_January_Tanzaku_Alt.svg" alt="Jan ribbon">
+          <img src="cards/Hanafuda_January_Kasu_1_Alt.svg" alt="Jan chaff 1">
+          <img src="cards/Hanafuda_January_Kasu_2_Alt.svg" alt="Jan chaff 2">
+        </div>
+        <div class="suit-info">
+          <div class="suit-month-label">January</div>
+          <div class="suit-kanji-sm">松</div>
+          <div class="suit-name">Pine</div>
+          <div class="card-tags">
+            <span class="tag tag-bright">Crane + sun (bright)</span>
+            <span class="tag tag-poetry">Poetry ribbon</span>
+            <span class="tag tag-chaff">Chaff × 2</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="suit-card">
+        <div class="suit-cards-col">
+          <img src="cards/Hanafuda_February_Tane_Alt.svg" alt="Feb animal">
+          <img src="cards/Hanafuda_February_Tanzaku_Alt.svg" alt="Feb ribbon">
+          <img src="cards/Hanafuda_February_Kasu_1_Alt.svg" alt="Feb chaff 1">
+          <img src="cards/Hanafuda_February_Kasu_2_Alt.svg" alt="Feb chaff 2">
+        </div>
+        <div class="suit-info">
+          <div class="suit-month-label">February</div>
+          <div class="suit-kanji-sm">梅</div>
+          <div class="suit-name">Plum blossom</div>
+          <div class="card-tags">
+            <span class="tag tag-animal">Nightingale</span>
+            <span class="tag tag-poetry">Poetry ribbon</span>
+            <span class="tag tag-chaff">Chaff × 2</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="suit-card">
+        <div class="suit-cards-col">
+          <img src="cards/Hanafuda_March_Hikari_Alt.svg" alt="Mar bright">
+          <img src="cards/Hanafuda_March_Tanzaku_Alt.svg" alt="Mar ribbon">
+          <img src="cards/Hanafuda_March_Kasu_1_Alt.svg" alt="Mar chaff 1">
+          <img src="cards/Hanafuda_March_Kasu_2_Alt.svg" alt="Mar chaff 2">
+        </div>
+        <div class="suit-info">
+          <div class="suit-month-label">March</div>
+          <div class="suit-kanji-sm">桜</div>
+          <div class="suit-name">Cherry blossom</div>
+          <div class="card-tags">
+            <span class="tag tag-bright">Curtain (bright)</span>
+            <span class="tag tag-poetry">Poetry ribbon</span>
+            <span class="tag tag-chaff">Chaff × 2</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="suit-card">
+        <div class="suit-cards-col">
+          <img src="cards/Hanafuda_April_Tane_Alt.svg" alt="Apr animal">
+          <img src="cards/Hanafuda_April_Tanzaku_Alt.svg" alt="Apr ribbon">
+          <img src="cards/Hanafuda_April_Kasu_1_Alt.svg" alt="Apr chaff 1">
+          <img src="cards/Hanafuda_April_Kasu_2_Alt.svg" alt="Apr chaff 2">
+        </div>
+        <div class="suit-info">
+          <div class="suit-month-label">April</div>
+          <div class="suit-kanji-sm">藤</div>
+          <div class="suit-name">Wisteria</div>
+          <div class="card-tags">
+            <span class="tag tag-animal">Cuckoo</span>
+            <span class="tag tag-ribbon">Plain ribbon</span>
+            <span class="tag tag-chaff">Chaff × 2</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="suit-card">
+        <div class="suit-cards-col">
+          <img src="cards/Hanafuda_May_Tane_Alt.svg" alt="May animal">
+          <img src="cards/Hanafuda_May_Tanzaku_Alt.svg" alt="May ribbon">
+          <img src="cards/Hanafuda_May_Kasu_1_Alt.svg" alt="May chaff 1">
+          <img src="cards/Hanafuda_May_Kasu_2_Alt.svg" alt="May chaff 2">
+        </div>
+        <div class="suit-info">
+          <div class="suit-month-label">May</div>
+          <div class="suit-kanji-sm">菖蒲</div>
+          <div class="suit-name">Iris</div>
+          <div class="card-tags">
+            <span class="tag tag-animal">Bridge</span>
+            <span class="tag tag-ribbon">Plain ribbon</span>
+            <span class="tag tag-chaff">Chaff × 2</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="suit-card">
+        <div class="suit-cards-col">
+          <img src="cards/Hanafuda_June_Tane_Alt.svg" alt="Jun animal">
+          <img src="cards/Hanafuda_June_Tanzaku_Alt.svg" alt="Jun ribbon">
+          <img src="cards/Hanafuda_June_Kasu_1_Alt.svg" alt="Jun chaff 1">
+          <img src="cards/Hanafuda_June_Kasu_2_Alt.svg" alt="Jun chaff 2">
+        </div>
+        <div class="suit-info">
+          <div class="suit-month-label">June</div>
+          <div class="suit-kanji-sm">牡丹</div>
+          <div class="suit-name">Peony</div>
+          <div class="card-tags">
+            <span class="tag tag-animal">Butterfly ★</span>
+            <span class="tag tag-blue">Blue ribbon</span>
+            <span class="tag tag-chaff">Chaff × 2</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="suit-card">
+        <div class="suit-cards-col">
+          <img src="cards/Hanafuda_July_Tane_Alt.svg" alt="Jul animal">
+          <img src="cards/Hanafuda_July_Tanzaku_Alt.svg" alt="Jul ribbon">
+          <img src="cards/Hanafuda_July_Kasu_1_Alt.svg" alt="Jul chaff 1">
+          <img src="cards/Hanafuda_July_Kasu_2_Alt.svg" alt="Jul chaff 2">
+        </div>
+        <div class="suit-info">
+          <div class="suit-month-label">July</div>
+          <div class="suit-kanji-sm">萩</div>
+          <div class="suit-name">Bush clover</div>
+          <div class="card-tags">
+            <span class="tag tag-animal">Boar ★</span>
+            <span class="tag tag-ribbon">Plain ribbon</span>
+            <span class="tag tag-chaff">Chaff × 2</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="suit-card">
+        <div class="suit-cards-col">
+          <img src="cards/Hanafuda_August_Hikari_Alt.svg" alt="Aug bright">
+          <img src="cards/Hanafuda_August_Tane_Alt.svg" alt="Aug animal">
+          <img src="cards/Hanafuda_August_Kasu_1_Alt.svg" alt="Aug chaff 1">
+          <img src="cards/Hanafuda_August_Kasu_2_Alt.svg" alt="Aug chaff 2">
+        </div>
+        <div class="suit-info">
+          <div class="suit-month-label">August</div>
+          <div class="suit-kanji-sm">芒</div>
+          <div class="suit-name">Pampas grass</div>
+          <div class="card-tags">
+            <span class="tag tag-bright">Full moon (bright)</span>
+            <span class="tag tag-animal">Geese</span>
+            <span class="tag tag-chaff">Chaff × 2</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="suit-card">
+        <div class="suit-cards-col">
+          <img src="cards/Hanafuda_September_Tane_Alt.svg" alt="Sep animal">
+          <img src="cards/Hanafuda_September_Tanzaku_Alt.svg" alt="Sep ribbon">
+          <img src="cards/Hanafuda_September_Kasu_1_Alt.svg" alt="Sep chaff 1">
+          <img src="cards/Hanafuda_September_Kasu_2_Alt.svg" alt="Sep chaff 2">
+        </div>
+        <div class="suit-info">
+          <div class="suit-month-label">September</div>
+          <div class="suit-kanji-sm">菊</div>
+          <div class="suit-name">Chrysanthemum</div>
+          <div class="card-tags">
+            <span class="tag tag-animal">Sake cup ★</span>
+            <span class="tag tag-blue">Blue ribbon</span>
+            <span class="tag tag-chaff">Chaff × 2</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="suit-card">
+        <div class="suit-cards-col">
+          <img src="cards/Hanafuda_October_Tane_Alt.svg" alt="Oct animal">
+          <img src="cards/Hanafuda_October_Tanzaku_Alt.svg" alt="Oct ribbon">
+          <img src="cards/Hanafuda_October_Kasu_1_Alt.svg" alt="Oct chaff 1">
+          <img src="cards/Hanafuda_October_Kasu_2_Alt.svg" alt="Oct chaff 2">
+        </div>
+        <div class="suit-info">
+          <div class="suit-month-label">October</div>
+          <div class="suit-kanji-sm">紅葉</div>
+          <div class="suit-name">Maple</div>
+          <div class="card-tags">
+            <span class="tag tag-animal">Deer ★</span>
+            <span class="tag tag-blue">Blue ribbon</span>
+            <span class="tag tag-chaff">Chaff × 2</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="suit-card">
+        <div class="suit-cards-col">
+          <img src="cards/Hanafuda_November_Hikari_Alt.svg" alt="Nov bright">
+          <img src="cards/Hanafuda_November_Tane_Alt.svg" alt="Nov animal">
+          <img src="cards/Hanafuda_November_Tanzaku_Alt.svg" alt="Nov ribbon">
+          <img src="cards/Hanafuda_November_Kasu_Alt.svg" alt="Nov chaff">
+        </div>
+        <div class="suit-info">
+          <div class="suit-month-label">November</div>
+          <div class="suit-kanji-sm">柳</div>
+          <div class="suit-name">Willow / Rain</div>
+          <div class="card-tags">
+            <span class="tag tag-bright">Rainman (bright) ⚠</span>
+            <span class="tag tag-animal">Swallow</span>
+            <span class="tag tag-ribbon">Plain ribbon</span>
+            <span class="tag tag-chaff">Lightning (chaff)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="suit-card">
+        <div class="suit-cards-col">
+          <img src="cards/Hanafuda_December_Hikari_Alt.svg" alt="Dec bright">
+          <img src="cards/Hanafuda_December_Kasu_1_Alt.svg" alt="Dec chaff 1">
+          <img src="cards/Hanafuda_December_Kasu_2_Alt.svg" alt="Dec chaff 2">
+          <img src="cards/Hanafuda_December_Kasu_3_Alt.svg" alt="Dec chaff 3">
+        </div>
+        <div class="suit-info">
+          <div class="suit-month-label">December</div>
+          <div class="suit-kanji-sm">桐</div>
+          <div class="suit-name">Paulownia</div>
+          <div class="card-tags">
+            <span class="tag tag-bright">Phoenix (bright)</span>
+            <span class="tag tag-chaff">Yellow chaff</span>
+            <span class="tag tag-chaff">Chaff × 2</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <p style="font-size:11px; color:var(--muted); margin-top:14px;">★ = appears in ino-shika-cho or sake yaku &nbsp;|&nbsp; ⚠ = rainman weakens bright yaku (see strategy)</p>
+  </div>
+</section>
+
+<!-- SPECIAL CARDS -->
+<section id="specials">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">Key pieces to know</div>
+      <h2 class="section-title">Special cards <span class="section-kanji">特別なカード</span></h2>
+      <p class="section-desc">These cards drive the highest-value yaku. Learn to recognize them immediately on the field.</p>
+    </div>
+
+    <p class="subgroup-label">The five brights (hikari 光)</p>
+    <div class="special-grid" style="margin-bottom:32px;">
+      <div class="special-card">
+        <img src="cards/Hanafuda_January_Hikari_Alt.svg" alt="Crane">
+        <div class="special-card-name">Crane + sun</div>
+        <div class="special-card-sub">January · Pine</div>
+        <div class="special-card-note">White crane beneath a red sun. The most iconic hanafuda image.</div>
+      </div>
+      <div class="special-card">
+        <img src="cards/Hanafuda_March_Hikari_Alt.svg" alt="Curtain">
+        <div class="special-card-name">Cherry curtain</div>
+        <div class="special-card-sub">March · Cherry blossom</div>
+        <div class="special-card-note">A red curtain strung between trees for flower-viewing. Pairs with sake cup for hanami-zake.</div>
+      </div>
+      <div class="special-card">
+        <img src="cards/Hanafuda_August_Hikari_Alt.svg" alt="Moon">
+        <div class="special-card-name">Full moon</div>
+        <div class="special-card-sub">August · Pampas grass</div>
+        <div class="special-card-note">Large yellow moon over pampas grass. Pairs with sake cup for tsukimizake.</div>
+      </div>
+      <div class="special-card">
+        <img src="cards/Hanafuda_November_Hikari_Alt.svg" alt="Rainman">
+        <div class="special-card-name">Rainman</div>
+        <div class="special-card-sub">November · Willow</div>
+        <div class="special-card-note">Ono no Tōfū in the rain. Reduces four brights from 8 to 7 pts. Doesn't count toward three brights at all.</div>
+      </div>
+      <div class="special-card">
+        <img src="cards/Hanafuda_December_Hikari_Alt.svg" alt="Phoenix">
+        <div class="special-card-name">Phoenix</div>
+        <div class="special-card-sub">December · Paulownia</div>
+        <div class="special-card-note">Yellow paulownia with a Chinese phoenix. Completes the full five brights (goko).</div>
+      </div>
+    </div>
+
+    <p class="subgroup-label">The ino-shika-cho trio (猪鹿蝶) — 5 pts</p>
+    <div class="special-grid" style="margin-bottom:32px;">
+      <div class="special-card">
+        <img src="cards/Hanafuda_July_Tane_Alt.svg" alt="Boar">
+        <div class="special-card-name">Boar</div>
+        <div class="special-card-sub">July · Bush clover</div>
+        <div class="special-card-note">Wild boar running through clover. One of the three required for this 5-pt combo.</div>
+      </div>
+      <div class="special-card">
+        <img src="cards/Hanafuda_October_Tane_Alt.svg" alt="Deer">
+        <div class="special-card-name">Deer</div>
+        <div class="special-card-sub">October · Maple</div>
+        <div class="special-card-note">Stag among red maple leaves. One of the three required for this 5-pt combo.</div>
+      </div>
+      <div class="special-card">
+        <img src="cards/Hanafuda_June_Tane_Alt.svg" alt="Butterfly">
+        <div class="special-card-name">Butterfly</div>
+        <div class="special-card-sub">June · Peony</div>
+        <div class="special-card-note">Two butterflies among peonies. Completes ino-shika-cho. Appears in about 8% of rounds.</div>
+      </div>
+    </div>
+
+    <p class="subgroup-label">The sake cup — most flexible card</p>
+    <div class="special-grid">
+      <div class="special-card">
+        <img src="cards/Hanafuda_September_Tane_Alt.svg" alt="Sake cup">
+        <div class="special-card-name">Sake cup</div>
+        <div class="special-card-sub">September · Chrysanthemum</div>
+        <div class="special-card-note">Participates in tane yaku, hanami-zake (with Mar curtain), and tsukimizake (with Aug moon). Watch any opponent who holds it.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- YAKU -->
+<section id="yaku">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">Scoring combinations</div>
+      <h2 class="section-title">Yaku <span class="section-kanji">役</span></h2>
+      <p class="section-desc">Complete these combinations to score. Multiple yaku stack — score all of them simultaneously. Koi-koi and 7+ pt multipliers apply on top.</p>
+    </div>
+
+    <div class="yaku-group">
+      <div class="yaku-group-title">Bright yaku (光) — highest value</div>
+      <div class="yaku-grid">
+
+        <div class="yaku-card">
+          <div class="yaku-top">
+            <div><div class="yaku-name">Five brights</div><div class="yaku-kanji-sm">五光 Goko</div></div>
+            <div class="yaku-pts pts-s">10 pts</div>
+          </div>
+          <div class="yaku-desc">All 5 bright cards. Rarest hand — appears in under 2% of rounds.</div>
+          <div class="yaku-cards-row">
+            <img src="cards/Hanafuda_January_Hikari_Alt.svg" alt="Crane">
+            <span class="yaku-plus">+</span>
+            <img src="cards/Hanafuda_March_Hikari_Alt.svg" alt="Curtain">
+            <span class="yaku-plus">+</span>
+            <img src="cards/Hanafuda_August_Hikari_Alt.svg" alt="Moon">
+            <span class="yaku-plus">+</span>
+            <img src="cards/Hanafuda_November_Hikari_Alt.svg" alt="Rainman">
+            <span class="yaku-plus">+</span>
+            <img src="cards/Hanafuda_December_Hikari_Alt.svg" alt="Phoenix">
+          </div>
+        </div>
+
+        <div class="yaku-card">
+          <div class="yaku-top">
+            <div><div class="yaku-name">Four brights</div><div class="yaku-kanji-sm">四光 Shiko</div></div>
+            <div class="yaku-pts pts-s">8 pts</div>
+          </div>
+          <div class="yaku-desc">Any 4 brights, NOT including rainman. Having rainman drops you to rainy four (7 pts).</div>
+          <div class="yaku-cards-row">
+            <img src="cards/Hanafuda_January_Hikari_Alt.svg" alt="Crane">
+            <img src="cards/Hanafuda_March_Hikari_Alt.svg" alt="Curtain">
+            <img src="cards/Hanafuda_August_Hikari_Alt.svg" alt="Moon">
+            <img src="cards/Hanafuda_December_Hikari_Alt.svg" alt="Phoenix">
+          </div>
+        </div>
+
+        <div class="yaku-card">
+          <div class="yaku-top">
+            <div><div class="yaku-name">Rainy four brights</div><div class="yaku-kanji-sm">雨四光 Ameshiko</div></div>
+            <div class="yaku-pts pts-s">7 pts</div>
+          </div>
+          <div class="yaku-desc">Any 4 brights including rainman. One point less than the "dry" four brights.</div>
+          <div class="yaku-cards-row">
+            <img src="cards/Hanafuda_January_Hikari_Alt.svg" alt="Crane">
+            <img src="cards/Hanafuda_March_Hikari_Alt.svg" alt="Curtain">
+            <img src="cards/Hanafuda_August_Hikari_Alt.svg" alt="Moon">
+            <img src="cards/Hanafuda_November_Hikari_Alt.svg" alt="Rainman">
+          </div>
+        </div>
+
+        <div class="yaku-card">
+          <div class="yaku-top">
+            <div><div class="yaku-name">Three brights</div><div class="yaku-kanji-sm">三光 Sanko</div></div>
+            <div class="yaku-pts pts-s">5 pts</div>
+          </div>
+          <div class="yaku-desc">Any 3 brights, NOT including rainman. Rainman doesn't count toward this yaku at all.</div>
+          <div class="yaku-cards-row">
+            <img src="cards/Hanafuda_January_Hikari_Alt.svg" alt="Crane">
+            <img src="cards/Hanafuda_March_Hikari_Alt.svg" alt="Curtain">
+            <img src="cards/Hanafuda_December_Hikari_Alt.svg" alt="Phoenix">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="yaku-group">
+      <div class="yaku-group-title">Animal yaku (種)</div>
+      <div class="yaku-grid">
+
+        <div class="yaku-card">
+          <div class="yaku-top">
+            <div><div class="yaku-name">Boar-deer-butterfly</div><div class="yaku-kanji-sm">猪鹿蝶 Ino-shika-cho</div></div>
+            <div class="yaku-pts pts-a">5 pts</div>
+          </div>
+          <div class="yaku-desc">The most commonly completed high-value yaku (~8% of rounds). All three specific cards required.</div>
+          <div class="yaku-cards-row">
+            <img src="cards/Hanafuda_July_Tane_Alt.svg" alt="Boar">
+            <span class="yaku-plus">+</span>
+            <img src="cards/Hanafuda_October_Tane_Alt.svg" alt="Deer">
+            <span class="yaku-plus">+</span>
+            <img src="cards/Hanafuda_June_Tane_Alt.svg" alt="Butterfly">
+          </div>
+        </div>
+
+        <div class="yaku-card">
+          <div class="yaku-top">
+            <div><div class="yaku-name">Flower-viewing sake</div><div class="yaku-kanji-sm">花見酒 Hanami-zake</div></div>
+            <div class="yaku-pts pts-b">3 pts</div>
+          </div>
+          <div class="yaku-desc">Optional variant — confirm with your group. March curtain bright + September sake cup.</div>
+          <div class="yaku-cards-row">
+            <img src="cards/Hanafuda_March_Hikari_Alt.svg" alt="Curtain">
+            <span class="yaku-plus">+</span>
+            <img src="cards/Hanafuda_September_Tane_Alt.svg" alt="Sake cup">
+          </div>
+        </div>
+
+        <div class="yaku-card">
+          <div class="yaku-top">
+            <div><div class="yaku-name">Moon-viewing sake</div><div class="yaku-kanji-sm">月見酒 Tsukimizake</div></div>
+            <div class="yaku-pts pts-b">3 pts</div>
+          </div>
+          <div class="yaku-desc">Optional variant — confirm with your group. August moon bright + September sake cup.</div>
+          <div class="yaku-cards-row">
+            <img src="cards/Hanafuda_August_Hikari_Alt.svg" alt="Moon">
+            <span class="yaku-plus">+</span>
+            <img src="cards/Hanafuda_September_Tane_Alt.svg" alt="Sake cup">
+          </div>
+        </div>
+
+        <div class="yaku-card">
+          <div class="yaku-top">
+            <div><div class="yaku-name">Tane (animals)</div><div class="yaku-kanji-sm">種</div></div>
+            <div class="yaku-pts pts-c">1+ pts</div>
+          </div>
+          <div class="yaku-desc">5 or more animal cards = 1 pt. Each additional animal = +1 pt. Any animal cards count.</div>
+          <div class="yaku-cards-row">
+            <img src="cards/Hanafuda_February_Tane_Alt.svg" alt="Nightingale">
+            <img src="cards/Hanafuda_April_Tane_Alt.svg" alt="Cuckoo">
+            <img src="cards/Hanafuda_May_Tane_Alt.svg" alt="Bridge">
+            <img src="cards/Hanafuda_August_Tane_Alt.svg" alt="Geese">
+            <img src="cards/Hanafuda_September_Tane_Alt.svg" alt="Sake cup">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="yaku-group">
+      <div class="yaku-group-title">Ribbon yaku (短冊)</div>
+      <div class="yaku-grid">
+
+        <div class="yaku-card">
+          <div class="yaku-top">
+            <div><div class="yaku-name">Poetry ribbons</div><div class="yaku-kanji-sm">赤短 Akatan</div></div>
+            <div class="yaku-pts pts-a">5 pts</div>
+          </div>
+          <div class="yaku-desc">All 3 red poetry ribbons (with calligraphy). January, February, and March only.</div>
+          <div class="yaku-cards-row">
+            <img src="cards/Hanafuda_January_Tanzaku_Alt.svg" alt="Jan ribbon">
+            <span class="yaku-plus">+</span>
+            <img src="cards/Hanafuda_February_Tanzaku_Alt.svg" alt="Feb ribbon">
+            <span class="yaku-plus">+</span>
+            <img src="cards/Hanafuda_March_Tanzaku_Alt.svg" alt="Mar ribbon">
+          </div>
+        </div>
+
+        <div class="yaku-card">
+          <div class="yaku-top">
+            <div><div class="yaku-name">Blue ribbons</div><div class="yaku-kanji-sm">青短 Aotan</div></div>
+            <div class="yaku-pts pts-a">5 pts</div>
+          </div>
+          <div class="yaku-desc">All 3 blue ribbons. June, September, and October only.</div>
+          <div class="yaku-cards-row">
+            <img src="cards/Hanafuda_June_Tanzaku_Alt.svg" alt="Jun ribbon">
+            <span class="yaku-plus">+</span>
+            <img src="cards/Hanafuda_September_Tanzaku_Alt.svg" alt="Sep ribbon">
+            <span class="yaku-plus">+</span>
+            <img src="cards/Hanafuda_October_Tanzaku_Alt.svg" alt="Oct ribbon">
+          </div>
+        </div>
+
+        <div class="yaku-card">
+          <div class="yaku-top">
+            <div><div class="yaku-name">Tanzaku (ribbons)</div><div class="yaku-kanji-sm">短冊</div></div>
+            <div class="yaku-pts pts-c">1+ pts</div>
+          </div>
+          <div class="yaku-desc">5 or more ribbon cards of any type = 1 pt. Each additional ribbon = +1 pt.</div>
+          <div class="yaku-cards-row">
+            <img src="cards/Hanafuda_April_Tanzaku_Alt.svg" alt="Apr ribbon">
+            <img src="cards/Hanafuda_May_Tanzaku_Alt.svg" alt="May ribbon">
+            <img src="cards/Hanafuda_July_Tanzaku_Alt.svg" alt="Jul ribbon">
+            <img src="cards/Hanafuda_November_Tanzaku_Alt.svg" alt="Nov ribbon">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="yaku-group">
+      <div class="yaku-group-title">Chaff yaku (カス)</div>
+      <div class="yaku-grid">
+        <div class="yaku-card">
+          <div class="yaku-top">
+            <div><div class="yaku-name">Kasu (chaff)</div><div class="yaku-kanji-sm">カス</div></div>
+            <div class="yaku-pts pts-c">1+ pts</div>
+          </div>
+          <div class="yaku-desc">10 or more chaff cards = 1 pt. Each additional chaff = +1 pt. There are 24 chaff total. Most actual wins combine tane + tanzaku + kasu.</div>
+          <div class="yaku-cards-row">
+            <img src="cards/Hanafuda_January_Kasu_1_Alt.svg" alt="Chaff">
+            <img src="cards/Hanafuda_February_Kasu_1_Alt.svg" alt="Chaff">
+            <img src="cards/Hanafuda_April_Kasu_1_Alt.svg" alt="Chaff">
+            <img src="cards/Hanafuda_May_Kasu_1_Alt.svg" alt="Chaff">
+            <img src="cards/Hanafuda_June_Kasu_1_Alt.svg" alt="Chaff">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RULES -->
+<section id="rules">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">How to play</div>
+      <h2 class="section-title">Rules <span class="section-kanji">ルール</span></h2>
+      <p class="section-desc">Each turn has two phases. Match cards by month (same flower). Build yaku. Decide when to stop.</p>
+    </div>
+    <div class="rules-flow">
+      <div class="rule-step">
+        <div class="step-num">01</div>
+        <div class="step-title">Setup</div>
+        <div class="step-body">Shuffle 48 cards. Deal 8 to each player, 8 face-up to the center field, 24 remain as the draw pile. Redeal if 4 cards of the same month appear in the starting field.</div>
+      </div>
+      <div class="rule-step">
+        <div class="step-num">02</div>
+        <div class="step-title">Play from hand</div>
+        <div class="step-body">Play one card from your hand. If it matches a field card by month (same flower), capture both. If two field cards match, capture all three. If no match, your card stays on the field.</div>
+      </div>
+      <div class="rule-step">
+        <div class="step-num">03</div>
+        <div class="step-title">Draw from pile</div>
+        <div class="step-body">Flip the top draw card. Apply the same matching rule. If two field cards match, choose which one to capture — the other stays on the field.</div>
+      </div>
+      <div class="rule-step">
+        <div class="step-num">04</div>
+        <div class="step-title">Check for yaku</div>
+        <div class="step-body">After both phases, check if you completed any yaku. If you have, you must declare immediately: koi-koi or shobu (stop). The round ends when a player stops, or the draw pile runs out.</div>
+      </div>
+    </div>
+
+    <p style="font-size:12px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); margin-bottom:14px;">The koi-koi decision</p>
+    <div class="decision-row">
+      <div class="decision-box koi">
+        <div class="decision-title">"Koi-koi!" — continue</div>
+        <div class="decision-body">Keep playing to build more yaku or higher scores. If you later call stop, your score doubles (×2). Risk: if your opponent completes a yaku and stops first, they score double and you get nothing.</div>
+      </div>
+      <div class="decision-box stop">
+        <div class="decision-title">"Shobu!" — stop</div>
+        <div class="decision-body">End the round now and bank your current points. Safe, but you may leave points on the table. If your opponent previously called koi-koi, your payout doubles when you stop.</div>
+      </div>
+    </div>
+    <div class="rule-note"><strong>Scoring multipliers:</strong> Add all yaku values first, then apply multipliers. Calling koi-koi and winning = ×2. Scoring 7+ pts in most variants = ×2. Both stack — maximum ×4.</div>
+    <div class="rule-note"><strong>Full game:</strong> 12 rounds, one per month. The dealer alternates each round. Highest cumulative total after all 12 rounds wins.</div>
+  </div>
+</section>
+
+<!-- STRATEGY -->
+<section id="strategy">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-eyebrow">Playing to win</div>
+      <h2 class="section-title">Strategy <span class="section-kanji">戦略</span></h2>
+      <p class="section-desc">Koi-koi rewards reading both your own hand and your opponent's captures.</p>
+    </div>
+    <div class="strategy-grid">
+      <div class="tip-card">
+        <div class="tip-title">Pursue efficient yaku</div>
+        <ul class="tip-list">
+          <li>Poetry ribbons (akatan) and blue ribbons (aotan) both give 5 pts for 3 specific cards. If you start with 1–2 of a set, pursue it hard.</li>
+          <li>Ino-shika-cho gives 5 pts for 3 animals. Completes in about 8% of rounds — common enough to plan around.</li>
+          <li>Three brights (5 pts) requires 3 of the 5 bright cards. Strong if you start with 2 in hand.</li>
+        </ul>
+      </div>
+      <div class="tip-card">
+        <div class="tip-title">When to call koi-koi</div>
+        <ul class="tip-list">
+          <li>Call when you need only 1 more card for a yaku worth significantly more than your current score.</li>
+          <li>Call when the round has many turns left and your opponent has captured little.</li>
+          <li>Stop when your opponent already holds 2 brights, or has ribbons and animals accumulating.</li>
+          <li>Stop when 7+ pts gives you a strong multiplied payout regardless.</li>
+        </ul>
+      </div>
+      <div class="tip-card">
+        <div class="tip-title">Deny your opponent</div>
+        <ul class="tip-list">
+          <li>Track what your opponent captures. A player one bright away from three brights deserves aggressive denial — grab that bright even if it doesn't help your yaku.</li>
+          <li>The sake cup (September) participates in two drinking yaku. Watch any opponent who holds it.</li>
+          <li>When two field cards of the same month appear, your opponent can capture both with one play. Deny it by capturing one first.</li>
+        </ul>
+      </div>
+      <div class="tip-card">
+        <div class="tip-title">The November (rainman) quirk</div>
+        <ul class="tip-list">
+          <li>Rainman doesn't count toward three brights (sanko). It actively weakens your bright strategy.</li>
+          <li>Four brights with rainman = 7 pts (rainy four). Without rainman = 8 pts.</li>
+          <li>Starting with the rainman in hand changes which bright yaku remain achievable. Adjust plans accordingly.</li>
+        </ul>
+      </div>
+      <div class="tip-card">
+        <div class="tip-title">Mix low-tier yaku</div>
+        <ul class="tip-list">
+          <li>Most actual wins come from combining tane + tanzaku + kasu, not rare hands.</li>
+          <li>24 of 48 cards are chaff. In a low-value round, whoever reaches 10 chaff first holds tempo.</li>
+          <li>Don't sacrifice naturally accumulating ribbons and animals while chasing a bright yaku that isn't materializing.</li>
+        </ul>
+      </div>
+      <div class="tip-card">
+        <div class="tip-title">Risk calculus</div>
+        <ul class="tip-list">
+          <li>Calling koi-koi when you hold 3 pts and your opponent scores means they get 6 pts and you get 0. The higher your current score, the more you risk.</li>
+          <li>Calling koi-koi repeatedly stacks multiplier potential — but also stacks risk. A 3-pt score doubled once = 6. If your opponent stops while you're chasing, you earned 0.</li>
+          <li>Early in a round, koi-koi costs little. Late in a round with few cards left, it costs a great deal.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>Card images from <a href="https://commons.wikimedia.org/wiki/Category:SVG_Hanafuda_with_traditional_colors_(black_border)" target="_blank" rel="noopener">Wikimedia Commons</a>, CC BY-SA 4.0 (Spenĉjo et al.)</p>
+    <p>Rules based on standard two-player koi-koi format. Variant rules (sake yaku, teyaku) may differ by region and house rules.</p>
+    <p>Typography: <a href="https://fonts.google.com/noto/specimen/Noto+Serif+JP" target="_blank" rel="noopener">Noto Serif JP</a> &amp; <a href="https://fonts.google.com/noto/specimen/Noto+Sans+JP" target="_blank" rel="noopener">Noto Sans JP</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
