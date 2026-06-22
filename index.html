@@ -240,10 +240,36 @@ footer {
   line-height: 1.9;
 }
 footer a { color: rgba(247,243,236,0.55); }
+.deck-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  padding: 8px 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(247,243,236,0.6);
+  font-size: 12px;
+  font-family: 'Noto Sans JP', sans-serif;
+  letter-spacing: 0.05em;
+  transition: color 0.15s;
+  white-space: nowrap;
+}
+.deck-toggle:hover { color: var(--paper); }
+.deck-toggle-pip {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  flex-shrink: 0;
+}
+body.deck-alt .deck-toggle-pip { background: currentColor; }
 @media (max-width: 520px) {
   .decision-row { grid-template-columns: 1fr; }
   .hero-cards img { width: 38px; }
   nav a { padding: 11px 12px; font-size: 12px; }
+  .deck-toggle { margin-left: 0; }
 }
 </style>
 </head>
@@ -269,6 +295,10 @@ footer a { color: rgba(247,243,236,0.55); }
     <a href="#yaku">Yaku</a>
     <a href="#rules">Rules</a>
     <a href="#strategy">Strategy</a>
+    <button class="deck-toggle" onclick="toggleDeck()" title="Switch card deck style">
+      <span class="deck-toggle-pip"></span>
+      <span id="deck-label">Red border</span>
+    </button>
   </div>
 </nav>
 
@@ -317,7 +347,7 @@ footer a { color: rgba(247,243,236,0.55); }
         <div class="suit-info">
           <div class="suit-month-label">February</div>
           <div class="suit-kanji-sm">梅</div>
-          <div class="suit-name">Plum blossom</div>
+          <div class="suit-name">Ume blossom</div>
           <div class="card-tags">
             <span class="tag tag-animal">Nightingale</span>
             <span class="tag tag-poetry">Poetry ribbon</span>
@@ -336,7 +366,7 @@ footer a { color: rgba(247,243,236,0.55); }
         <div class="suit-info">
           <div class="suit-month-label">March</div>
           <div class="suit-kanji-sm">桜</div>
-          <div class="suit-name">Cherry blossom</div>
+          <div class="suit-name">Sakura blossom</div>
           <div class="card-tags">
             <span class="tag tag-bright">Curtain (bright)</span>
             <span class="tag tag-poetry">Poetry ribbon</span>
@@ -431,7 +461,7 @@ footer a { color: rgba(247,243,236,0.55); }
         <div class="suit-info">
           <div class="suit-month-label">August</div>
           <div class="suit-kanji-sm">芒</div>
-          <div class="suit-name">Pampas grass</div>
+          <div class="suit-name">Susuki grass</div>
           <div class="card-tags">
             <span class="tag tag-bright">Full moon (bright)</span>
             <span class="tag tag-animal">Geese</span>
@@ -541,14 +571,14 @@ footer a { color: rgba(247,243,236,0.55); }
       </div>
       <div class="special-card">
         <img src="cards/Hanafuda_March_Hikari_Alt.svg" alt="Curtain">
-        <div class="special-card-name">Cherry curtain</div>
-        <div class="special-card-sub">March · Cherry blossom</div>
+        <div class="special-card-name">Sakura curtain</div>
+        <div class="special-card-sub">March · Sakura blossom</div>
         <div class="special-card-note">A red curtain strung between trees for flower-viewing. Pairs with sake cup for hanami-zake.</div>
       </div>
       <div class="special-card">
         <img src="cards/Hanafuda_August_Hikari_Alt.svg" alt="Moon">
         <div class="special-card-name">Full moon</div>
-        <div class="special-card-sub">August · Pampas grass</div>
+        <div class="special-card-sub">August · Susuki grass</div>
         <div class="special-card-note">Large yellow moon over pampas grass. Pairs with sake cup for tsukimizake.</div>
       </div>
       <div class="special-card">
@@ -927,6 +957,18 @@ footer a { color: rgba(247,243,236,0.55); }
     <p>Typography: <a href="https://fonts.google.com/noto/specimen/Noto+Serif+JP" target="_blank" rel="noopener">Noto Serif JP</a> &amp; <a href="https://fonts.google.com/noto/specimen/Noto+Sans+JP" target="_blank" rel="noopener">Noto Sans JP</a></p>
   </div>
 </footer>
+
+<script>
+function toggleDeck() {
+  var alt = document.body.classList.toggle('deck-alt');
+  document.getElementById('deck-label').textContent = alt ? 'Black border' : 'Red border';
+  var from = alt ? 'cards/' : 'cards-alt/';
+  var to   = alt ? 'cards-alt/' : 'cards/';
+  document.querySelectorAll('img[src]').forEach(function(img) {
+    img.src = img.src.replace(from, to);
+  });
+}
+</script>
 
 </body>
 </html>
